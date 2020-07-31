@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:newedok/models/cities_model.dart';
 import 'package:provider/provider.dart';
 import '../imports.dart';
 
@@ -43,9 +44,7 @@ Auth request
       if (response.statusCode == 200) {
         var userData = json.decode(response.body);
         var bloc = Provider.of<MainBloc>(context);
-        bloc.userToken = userData['user']['token'];
-        bloc.userPhone = userData['user']['phone'];
-        print(response.body);
+        bloc.setUserData(userData['user']);
         return true;
       } else {
         print(response.statusCode);
@@ -96,6 +95,24 @@ request for cities
       print(error);
     }
   }
+
+
+
+  static Future getCitiesV2() async {
+    final response = await http.get("https://edok.kz/api/rest/cities?id_country=1", headers: {
+      "x-rest-username": "mp@admplaces",
+      "x-rest-password": "mp@7uf98HKHf"
+    });
+    if (response.statusCode == 200) {
+      Map data = json.decode(response.body);
+      print(data['cities'][0]);
+//      return Cities.fromJson();
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
+
 
 
   static Future getDistrictsByPlace(context)async {

@@ -39,18 +39,16 @@ class MainBloc with ChangeNotifier {
   double amount = 0.0;
 
   void setUserData(Map user) async {
+    this.userToken = user['token'];
+    this.userPhone = user['phone'];
     final storage = new FlutterSecureStorage();
-//    await storage.write(key: 'city', value: currentCity['id']);
-//    await storage.write(key: 'city_name', value: currentCity['name_prepositional']);
-    await storage.write(key: 'phone', value: this.userPhone);
-    await storage.write(key: 'token', value: this.userToken);
+    await storage.write(key: 'user_token', value: this.userToken);
+    await storage.write(key: 'user_phone', value: this.userPhone);
   }
 
   void setDataFromStorage(Map<String, String> storageData) {
-    this.currentCityId = storageData['city'];
-    this.currentCityName = storageData['city_name'];
-    this.userPhone = storageData['phone'];
-    this.userToken = storageData['token'];
+    this.userToken = storageData['user_token'];
+    this.userPhone = storageData['user_phone'];
   }
 
 }

@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:newedok/cities_page/cities_page.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:newedok/services/imports.dart';
 import 'package:newedok/themes/fond_and_colors.dart';
-import '../services/imports.dart';
-import '../services/api_services/requests.dart';
 import 'package:animated_dialog_box/animated_dialog_box.dart';
+import 'package:newedok/ui/cities_page/cities_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -44,6 +45,7 @@ class _LoginPageFormState extends State<LoginPageForm> {
   bool _autoValidate = false;
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  Map<String, String> storageData;
 
   String validateMobile(String value) {
     if (value.length != 16)
@@ -79,19 +81,20 @@ class _LoginPageFormState extends State<LoginPageForm> {
         child: Text('Продолжить'),
         onPressed: () {
           ApiService.phoneCodeSend(phone_numberController.text,
-              sms_confirm_codeController.text, context)
-              .then((codeAccepted) {
-            if (codeAccepted) {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) {
-                  return CitiesPage();
-                }),
-                    (Route<dynamic> route) => false,
-              );
-              Navigator.of(context, rootNavigator: true).pop(context);
-            }
-          },
+                  sms_confirm_codeController.text, context)
+              .then(
+            (codeAccepted) {
+              if (codeAccepted) {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return CitiesPage();
+                  }),
+                  (Route<dynamic> route) => false,
+                );
+                Navigator.of(context, rootNavigator: true).pop(context);
+              }
+            },
           );
         },
       ),
@@ -132,12 +135,15 @@ class _LoginPageFormState extends State<LoginPageForm> {
   @override
   void initState() {
     super.initState();
+    final storage = new FlutterSecureStorage();
+    storage.readAll().then((data) {
+      storageData = data;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    ApiService.getCities(context);
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
@@ -221,18 +227,28 @@ class _LoginPageFormState extends State<LoginPageForm> {
                             style: TextStyle(fontSize: 20),
                           ),
                           onPressed: () async {
-                            _validateInputs();
-                            if (validateMobile(phone_numberController.text) !=
-                                null) {
+                            if (storageData['user_token'] != null) {
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) {
+                                  return CitiesPage();
+                                }),
+                                (Route<dynamic> route) => false,
+                              );
                             } else {
-                              ApiService api = new ApiService();
-                              api
-                                  .phoneSend(phone_numberController.text)
-                                  .then((phoneAccepted) {
-                                if (phoneAccepted) {
-                                  _smsInput();
-                                }
-                              });
+                              _validateInputs();
+                              if (validateMobile(phone_numberController.text) !=
+                                  null) {
+                              } else {
+                                ApiService api = new ApiService();
+                                api
+                                    .phoneSend(phone_numberController.text)
+                                    .then((phoneAccepted) {
+                                  if (phoneAccepted) {
+                                    _smsInput();
+                                  }
+                                });
+                              }
                             }
                           }),
                     ))
