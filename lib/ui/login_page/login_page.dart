@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:mobx/mobx.dart';
+import 'package:newedok/injection.dart';
 import 'package:newedok/services/imports.dart';
 import 'package:newedok/themes/fond_and_colors.dart';
 import 'package:animated_dialog_box/animated_dialog_box.dart';
 import 'package:newedok/ui/cities_page/cities_page.dart';
+import 'package:newedok/ui/login_page/login_store.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with Store{
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -30,8 +33,10 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class LoginPageForm extends StatefulWidget {
+
   @override
   _LoginPageFormState createState() => _LoginPageFormState();
+
 }
 
 class _LoginPageFormState extends State<LoginPageForm> {
@@ -46,6 +51,8 @@ class _LoginPageFormState extends State<LoginPageForm> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   Map<String, String> storageData;
+
+
 
   String validateMobile(String value) {
     if (value.length != 16)

@@ -18,8 +18,15 @@ abstract class CitiesResponse with _$CitiesResponse {
 @freezed
 abstract class Cities with _$Cities {
   factory Cities({
-    @JsonKey(name: 'id') int id,
+    @JsonKey(name: 'id') String id,
     @JsonKey(name: 'city_name') String cityName,
+    @JsonKey(name: 'city_phone_code') String cityPhoneCode,
+    @JsonKey(name: 'alt_name') String altName,
+    @JsonKey(name: 'name_genitive') String nameGenitive,
+    @JsonKey(name: 'latitude') String latitude,
+    @JsonKey(name: 'longitude') String longitude,
+    @JsonKey(name: 'settings') String settings,
+    @JsonKey(name: 'id_country') String idCountry,
     @JsonKey(name: 'name_prepositional') String namePrepositional,
   }) = _Cities;
 

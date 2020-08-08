@@ -17,7 +17,7 @@ abstract class EdokApi {
         @required @Named('baseUrl') String baseUrl,
       }) = _EdokApi;
 
-  @GET('/cities?id_country=1')
+  @GET('cities?id_country=1')
   Future<CitiesResponse> getCities();
 
 /*  @GET('/car')

@@ -1,23 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:newedok/models/cities_model.dart';
-import 'package:newedok/services/api_services/requests.dart';
+import 'package:mobx/mobx.dart';
+import 'package:newedok/injection.dart';
+import 'package:flutter/rendering.dart';
+import 'package:newedok/stores/cities_store.dart';
 
 
-class CitiesPage extends StatefulWidget {
+class CitiesPage extends StatefulWidget  {
   @override
   _CitiesPageState createState() => _CitiesPageState();
 }
 
 class _CitiesPageState extends State<CitiesPage> {
-
-
-  @override
-  void initState() {
-    super.initState();
-
-  }
-
+  final CitiesStore _citiesStore = getIt();
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +22,9 @@ class _CitiesPageState extends State<CitiesPage> {
         title: Text('123'),
       ),
       body: ListView.builder(
-        itemCount: 12,
+        itemCount: _citiesStore.cities.value.length,
         itemBuilder: (context, index){
-          return Text('123');
+          return Text('${_citiesStore.cities.value[index].cityName}');
         },
       ),
     );
