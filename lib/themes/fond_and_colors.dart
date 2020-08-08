@@ -89,9 +89,9 @@ class AppThemeData {
           color: blackColor,
         ),
         contentBodyPrimary = _edokFont.copyWith(
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.w500,
           fontSize: 16.0,
-          color: secondaryDarker50Color,
+          color: blackColor,
         ),
         contentBodyTitleSecondary = _edokFont.copyWith(
           fontWeight: FontWeight.bold,
@@ -109,7 +109,7 @@ class AppThemeData {
           color: blackColor,
         ),
         toolbarTitle = _edokFont.copyWith(
-          fontWeight: FontWeight.normal,
+          fontWeight: FontWeight.bold,
           fontSize: 16.0,
           color: blackColor,
         );
@@ -123,7 +123,7 @@ class AppThemeData {
     accentColor: const Color(0xFFdc0027),
     secondaryLighterColor: const Color(0xFF909293),
     pinkColor: const Color(0xFFE1306C),
-    blackColor: const Color(0x61000000),
+    blackColor: const Color(0xFF000000),
     draftColor:const Color(0xFF1DA1F2),
     acceptedColor: const Color(0xFF1AAD19),
     orangeEdok: const Color(0xFFFF6E40),

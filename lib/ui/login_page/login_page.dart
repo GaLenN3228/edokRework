@@ -1,3 +1,5 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:newedok/ui/components/router/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -7,7 +9,7 @@ import 'package:newedok/services/imports.dart';
 import 'package:newedok/themes/fond_and_colors.dart';
 import 'package:animated_dialog_box/animated_dialog_box.dart';
 import 'package:newedok/ui/cities_page/cities_page.dart';
-import 'package:newedok/ui/login_page/login_store.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -92,14 +94,8 @@ class _LoginPageFormState extends State<LoginPageForm> {
               .then(
             (codeAccepted) {
               if (codeAccepted) {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) {
-                    return CitiesPage();
-                  }),
-                  (Route<dynamic> route) => false,
-                );
-                Navigator.of(context, rootNavigator: true).pop(context);
+                ExtendedNavigator.of(context).pushCitiesPage();
+                ExtendedNavigator.of(context).pop();
               }
             },
           );
