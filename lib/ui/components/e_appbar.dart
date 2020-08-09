@@ -77,10 +77,10 @@ class _AAppBarState extends State<AAppBar> {
                             if (widget.isShowLeading) ...[
                               IconTheme(
                                 data: IconThemeData(
-                                  color: Colors.white,
+                                  color: Colors.black,
                                   size: 25.0,
                                 ),
-                                child: _leading(),
+                                child: widget.leadingIcon != null ? _leading(): Container(),
                               ),
                             ],
                             if (!widget.isCenterTitle) ...[
@@ -91,7 +91,7 @@ class _AAppBarState extends State<AAppBar> {
                       ),
                       IconTheme(
                         data: IconThemeData(
-                          color: Colors.white,
+                          color: Colors.black,
                           size: 25.0,
                         ),
                         child: _trailing(),

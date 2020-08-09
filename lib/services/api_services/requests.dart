@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:newedok/models/cities_model.dart';
 import 'package:provider/provider.dart';
 import '../imports.dart';
 
@@ -87,7 +86,6 @@ request for cities
       });
       var bloc = Provider.of<MainBloc>(context);
       bloc.cities = json.decode(response.body)['cities'];
-      List cities = json.decode(response.body)['cities'];
 
 
 

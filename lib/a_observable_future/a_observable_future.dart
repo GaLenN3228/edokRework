@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/widgets.dart';
+
 import 'package:mobx/mobx.dart';
 
 class AFutureResult<T> {

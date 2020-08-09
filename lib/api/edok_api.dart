@@ -1,6 +1,7 @@
 import 'package:newedok/models/cities_model.dart';
+import 'package:newedok/models/places_model.dart';
 import 'package:retrofit/retrofit.dart';
-import 'dart:io';
+
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -19,6 +20,9 @@ abstract class EdokApi {
 
   @GET('cities?id_country=1')
   Future<CitiesResponse> getCities();
+
+  @GET('placesv2?id_city={id}')
+  Future<PlacesResponse> getPlaces(@Path() int id);
 
 /*  @GET('/car')
   Future<CarsResponse> getCars();

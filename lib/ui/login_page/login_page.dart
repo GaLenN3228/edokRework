@@ -94,8 +94,14 @@ class _LoginPageFormState extends State<LoginPageForm> {
               .then(
             (codeAccepted) {
               if (codeAccepted) {
-                ExtendedNavigator.of(context).pushCitiesPage();
-                ExtendedNavigator.of(context).pop();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) {
+                    return CitiesPage();
+                  }),
+                      (Route<dynamic> route) => false,
+                );
+                Navigator.of(context, rootNavigator: true).pop(context);
               }
             },
           );

@@ -37,30 +37,13 @@ class AppThemeData {
   final Color draftColor;
   final Color orangeEdok;
 
-//  final TextStyle bodyPrimary;
-//  final TextStyle bodyPrimaryRed;
-//  final TextStyle bodyPrimaryBold;
-//  final TextStyle bodySecondary;
-//  final TextStyle bodySecondaryHeight22;
-//  final TextStyle bodySecondaryBold;
-//  final TextStyle bodySecondaryWithWidth;
-//  final TextStyle bodyPrimaryUnderline;
-//  final TextStyle toolbarTitle;
-//  final TextStyle heading1Primary26;
-//  final TextStyle heading1Primary;
-//  final TextStyle heading2Primary;
-//  final TextStyle heading2PrimaryNormal;
-//  final TextStyle heading2Secondary;
-//  final TextStyle heading3Primary;
-//  final TextStyle subtitleSecondary;
-//  final TextStyle captionSecondary;
-//  final TextStyle captionPrimary;
-//  final TextStyle captionSecondaryDarker50;
   final TextStyle toolbarTitle;
+  final TextStyle toolbarTitleNormal;
   final TextStyle contentBodyTitle;
   final TextStyle contentBodyTitleBold;
   final TextStyle contentBodyPrimary;
   final TextStyle contentBodySecondary;
+  final TextStyle contentBodySecondaryOrange;
   final TextStyle contentBodyTitleSecondary;
   final TextStyle description;
 
@@ -99,13 +82,23 @@ class AppThemeData {
           color: blackColor,
         ),
         contentBodySecondary = _edokFont.copyWith(
-          fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.normal,
           fontSize: 14.0,
           color: secondaryDarker50Color,
+        ),
+        contentBodySecondaryOrange = _edokFont.copyWith(
+          fontWeight: FontWeight.w500,
+          fontSize: 14.0,
+          color: orangeEdok,
         ),
         description = _edokFont.copyWith(
           fontWeight: FontWeight.bold,
           fontSize: 14.0,
+          color: blackColor,
+        ),
+        toolbarTitleNormal = _edokFont.copyWith(
+          fontWeight: FontWeight.normal,
+          fontSize: 16.0,
           color: blackColor,
         ),
         toolbarTitle = _edokFont.copyWith(

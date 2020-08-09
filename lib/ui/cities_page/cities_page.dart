@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
+import 'package:newedok/ui/bottom_navigator_bar/home.dart';
+import 'package:newedok/ui/components/router/router.gr.dart';
+import 'package:newedok/ui/components/router/router.dart';
 import 'package:newedok/injection.dart';
 import 'package:flutter/rendering.dart';
 import 'package:newedok/services/imports.dart';
@@ -11,6 +14,7 @@ import 'package:newedok/ui/components/e_scaffold.dart';
 import 'package:newedok/ui/components/tappable.dart';
 
 class CitiesPage extends StatefulWidget {
+
   @override
   _CitiesPageState createState() => _CitiesPageState();
 }
@@ -22,69 +26,50 @@ class _CitiesPageState extends State<CitiesPage> {
   Widget build(BuildContext context) {
     return Material(
       child: AScaffold(
-        appBar: AAppBar(
-          title: Text(
-            'Выберите ваш город',
-            style: Thm.of(context).toolbarTitle,
-          ),
-          textStyle: Thm.of(context).toolbarTitle,
-          leadingIcon: Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: Icon(
-              Icons.arrow_back,
-              color: Thm.of(context).blackColor,
+          appBar: AAppBar(
+            title: Text(
+              'Выберите ваш город',
+              style: Thm.of(context).toolbarTitle,
             ),
-          ),
-        ),
-        body: CustomScrollView(
-          slivers: <Widget>[
-          SliverPadding(
-            padding: EdgeInsets.only(left: 20),
-            sliver:   SliverList(
-              delegate: SliverChildBuilderDelegate(
-                    (context, index) => Tappable(
-                  padding: EdgeInsets.only(top: 17, bottom: 17),
-                  onTap: (){
-                    print(_citiesStore.cities.value[index].id);
-                  },
-                  child: Text(
-                    '${_citiesStore.cities.value[index].cityName}',
-                    style: Thm.of(context).contentBodyPrimary,
-                  ),
-
-                ),
-                childCount: _citiesStore.cities.value.length,
-              ),
-
-            ),
-          )
-          ],
-
-        )
-
-      ),
-    );
-  }
-
-  Widget citiesList() {
-    return  ListView.separated(
-        separatorBuilder: (_, i) => SizedBox(
-          height: 17.0,
-        ),
-        itemCount: _citiesStore.cities.value.length,
-        itemBuilder: (context, index) {
-          return Tappable(
-            padding: EdgeInsets.only(top: 15, bottom: 15),
-            onTap: (){},
-            child: Padding(
+            textStyle: Thm.of(context).toolbarTitle,
+            leadingIcon: Padding(
               padding: const EdgeInsets.only(left: 15),
-              child: Text(
-                '${_citiesStore.cities.value[index].cityName}',
-                style: Thm.of(context).contentBodyPrimary,
+              child: Icon(
+                Icons.arrow_back,
+                color: Thm.of(context).blackColor,
               ),
             ),
-          );
-        },
-      );
+          ),
+          body: CustomScrollView(
+            slivers: <Widget>[
+              SliverPadding(
+                padding: EdgeInsets.only(left: 20),
+                sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) => Tappable(
+                      padding: EdgeInsets.only(top: 17, bottom: 17),
+                      onTap: () {
+                        //TODO заменить на EXTENDED NAVIGATOR
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Home(
+                                  cityName: _citiesStore.cities.value[index].namePrepositional,
+                                  cityId: int.parse(_citiesStore.cities.value[index].id))),
+                          (Route<dynamic> route) => false,
+                        );
+                      },
+                      child: Text(
+                        '${_citiesStore.cities.value[index].cityName}',
+                        style: Thm.of(context).contentBodyPrimary,
+                      ),
+                    ),
+                    childCount: _citiesStore.cities.value.length,
+                  ),
+                ),
+              )
+            ],
+          )),
+    );
   }
 }

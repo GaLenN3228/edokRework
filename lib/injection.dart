@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:newedok/api/edok_api.dart';
 import 'package:newedok/main.dart';
-import 'package:newedok/stores/cities_store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'injection.iconfig.dart';
